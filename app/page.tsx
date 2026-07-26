@@ -1,30 +1,6 @@
 export default function Home() {
 
-  const features = [
-    {
-      icon:"🎬",
-      title:"AI电影导演",
-      desc:"一句话生成剧情、分镜、运镜、完整影片方案"
-    },
-    {
-      icon:"🎨",
-      title:"AI视觉工作室",
-      desc:"生成商业海报、角色、场景和艺术作品"
-    },
-    {
-      icon:"🎙",
-      title:"AI声音引擎",
-      desc:"多语言真实配音和电影级声音设计"
-    },
-    {
-      icon:"⚡",
-      title:"Prompt智能优化",
-      desc:"自动生成专业级AI提示词"
-    }
-  ];
-
-
-  const models=[
+  const models = [
     "OpenAI Sora",
     "Runway Gen-4",
     "可灵AI",
@@ -34,216 +10,507 @@ export default function Home() {
   ];
 
 
-  const prices=[
+  const works = [
+    "🎬 星际穿越",
+    "🌆 未来赛博城市",
+    "🚗 AI商业广告"
+  ];
+
+
+  const features = [
     {
-      name:"Free",
-      price:"¥0",
-      desc:"体验AI创作"
+      icon:"🤖",
+      title:"AI导演",
+      desc:"自动生成剧情、分镜、镜头语言"
     },
     {
-      name:"Creator",
-      price:"¥39/月",
-      desc:"个人创作者"
+      icon:"🎬",
+      title:"影视生成",
+      desc:"一键创造电影级视频内容"
     },
     {
-      name:"Pro",
-      price:"¥99/月",
-      desc:"专业AI工作流"
+      icon:"🎙",
+      title:"智能配音",
+      desc:"多语言真实AI声音"
+    },
+    {
+      icon:"💎",
+      title:"会员创作",
+      desc:"更多额度和高级模型"
     }
   ];
 
 
   return (
 
-<main className="
-min-h-screen
-bg-black
-text-white
-overflow-hidden
-">
+    <main className="
+    min-h-screen
+    bg-black
+    text-white
+    overflow-hidden
+    ">
 
-<div className="
-fixed inset-0
-bg-[radial-gradient(circle_at_top,#312e81,transparent_45%)]
-">
-</div>
 
+      {/* 背景光 */}
+
+      <div className="
+      fixed
+      top-0
+      left-0
+      w-full
+      h-[500px]
+      bg-gradient-to-b
+      from-purple-700/40
+      via-blue-600/20
+      to-transparent
+      blur-3xl
+      " />
 
-<div className="relative z-10">
 
 
-{/* NAV */}
+      {/* 导航 */}
 
-<header className="
-flex
-justify-between
-items-center
-px-8
-py-6
-">
+      <nav className="
+      relative
+      flex
+      justify-between
+      items-center
+      px-6
+      py-8
+      ">
 
-<div className="
-text-3xl
-font-black
-">
-🚀 PromptX
-</div>
 
+        <h1 className="
+        text-3xl
+        font-black
+        ">
+          🚀 PromptX
+          <br/>
+          Studio
+        </h1>
 
-<nav className="
-hidden md:flex
-gap-8
-text-gray-300
-">
 
-<span>AI视频</span>
-<span>AI图片</span>
-<span>Prompt库</span>
-<span>价格</span>
+        <button className="
+        bg-white
+        text-black
+        px-7
+        py-3
+        rounded-full
+        font-bold
+        ">
+          登录
+        </button>
 
-</nav>
 
+      </nav>
 
-<button className="
-bg-white
-text-black
-px-7
-py-3
-rounded-full
-font-bold
-">
 
-登录
 
-</button>
 
 
-</header>
+      {/* 首屏 */}
 
+      <section className="
+      relative
+      px-6
+      pt-16
+      text-center
+      ">
 
 
+        <div className="
+        inline-block
+        px-6
+        py-3
+        rounded-full
+        border
+        border-white/20
+        bg-white/5
+        ">
+          ✨ AI Creative Engine
+        </div>
 
-{/* HERO */}
 
 
-<section className="
-text-center
-pt-24
-px-6
-">
+        <h2 className="
+        mt-12
+        text-5xl
+        md:text-7xl
+        font-black
+        leading-tight
+        ">
 
+          一句话
 
-<div className="
-inline-flex
-px-8
-py-3
-rounded-full
-border
-border-white/20
-bg-white/5
-">
+          <br/>
 
-✨ The Future of AI Creation
+          <span className="
+          bg-gradient-to-r
+          from-cyan-400
+          via-purple-500
+          to-pink-500
+          bg-clip-text
+          text-transparent
+          ">
+          生成电影级作品
+          </span>
 
-</div>
 
+        </h2>
 
 
-<h1 className="
-mt-12
-text-6xl
-md:text-8xl
-font-black
-leading-tight
-">
 
-用 AI 创造
+        <p className="
+        mt-8
+        text-gray-400
+        text-lg
+        ">
+          AI视频 · AI图片 · 脚本 · 分镜 · Prompt
+        </p>
 
-<br/>
+
 
 
-<span className="
-bg-gradient-to-r
-from-cyan-400
-via-purple-500
-to-pink-500
-bg-clip-text
-text-transparent
-">
 
-电影级智能内容
+        {/* 输入框 */}
 
-</span>
+        <div className="
+        mt-12
+        max-w-xl
+        mx-auto
+        rounded-3xl
+        border
+        border-white/20
+        bg-white/10
+        backdrop-blur-xl
+        p-5
+        ">
 
 
-</h1>
+          <textarea
 
+          placeholder="
+输入你的创意...
 
+例如：
+宇航员穿越黑洞，
+电影级镜头，IMAX画质
+          "
 
-<p className="
-mt-10
-text-xl
-text-gray-400
-max-w-3xl
-mx-auto
-">
+          className="
+          w-full
+          h-36
+          bg-transparent
+          outline-none
+          resize-none
+          text-white
+          placeholder-gray-500
+          "
+          
+          />
 
-一句话生成 AI 视频、图片、脚本、分镜、
-声音和专业 Prompt
 
-</p>
+          <button className="
+          w-full
+          py-4
+          rounded-2xl
+          bg-gradient-to-r
+          from-cyan-400
+          to-purple-600
+          font-bold
+          text-lg
+          ">
+            ✨ 开始生成
+          </button>
 
 
+        </div>
 
-<div className="
-flex
-justify-center
-gap-6
-mt-12
-">
 
+      </section>
+            {/* 模型支持 */}
 
-<button className="
-px-10
-py-5
-rounded-full
-bg-white
-text-black
-text-xl
-font-bold
-">
+      <section className="
+      px-6
+      mt-28
+      relative
+      ">
 
-开始创作
 
-</button>
+        <h2 className="
+        text-3xl
+        font-black
+        ">
+          支持模型
+        </h2>
 
 
+        <div className="
+        flex
+        flex-wrap
+        gap-3
+        mt-8
+        ">
 
-<button className="
-px-10
-py-5
-rounded-full
-border
-border-white/30
-text-xl
-">
 
-AI导演模式
+        {
+          models.map((model)=>(
 
-</button>
+            <div
+            key={model}
+            className="
+            px-5
+            py-3
+            rounded-full
+            bg-white/5
+            border
+            border-white/20
+            text-gray-200
+            "
+            >
 
+              {model}
 
-</div>
+            </div>
 
+          ))
+        }
 
-</section>
 
+        </div>
 
-    </div>
 
+      </section>
 
-  </main>
 
-)
+
+
+
+
+      {/* 热门作品 */}
+
+      <section className="
+      px-6
+      mt-28
+      ">
+
+
+        <h2 className="
+        text-3xl
+        font-black
+        ">
+          🔥 热门作品
+        </h2>
+
+
+
+        <div className="
+        grid
+        grid-cols-1
+        md:grid-cols-3
+        gap-5
+        mt-8
+        ">
+
+
+        {
+          works.map((work)=>(
+
+            <div
+            key={work}
+            className="
+            h-44
+            rounded-3xl
+            bg-gradient-to-br
+            from-white/10
+            to-white/5
+            border
+            border-white/20
+            flex
+            items-center
+            justify-center
+            text-xl
+            font-bold
+            "
+            >
+
+              {work}
+
+            </div>
+
+          ))
+        }
+
+
+        </div>
+
+
+      </section>
+
+
+
+
+
+
+
+      {/* 核心能力 */}
+
+      <section className="
+      px-6
+      mt-28
+      ">
+
+
+        <h2 className="
+        text-3xl
+        font-black
+        ">
+          为什么选择 PromptX
+        </h2>
+
+
+
+
+        <div className="
+        grid
+        grid-cols-1
+        md:grid-cols-2
+        gap-5
+        mt-10
+        ">
+
+
+        {
+          features.map((item)=>(
+
+            <div
+            key={item.title}
+            className="
+            p-6
+            rounded-3xl
+            bg-white/5
+            border
+            border-white/10
+            "
+            >
+
+
+              <div className="text-4xl">
+                {item.icon}
+              </div>
+
+
+              <h3 className="
+              mt-5
+              text-xl
+              font-bold
+              ">
+                {item.title}
+              </h3>
+
+
+              <p className="
+              mt-3
+              text-gray-400
+              ">
+                {item.desc}
+              </p>
+
+
+            </div>
+
+
+          ))
+        }
+
+
+        </div>
+
+
+      </section>
+
+
+
+
+
+
+
+      {/* 会员 */}
+
+      <section className="
+      px-6
+      mt-28
+      pb-20
+      ">
+
+
+        <div className="
+        rounded-3xl
+        p-8
+        bg-gradient-to-r
+        from-purple-600/30
+        to-blue-600/30
+        border
+        border-white/20
+        text-center
+        ">
+
+
+          <h2 className="
+          text-3xl
+          font-black
+          ">
+            开启 AI 创作会员
+          </h2>
+
+
+          <p className="
+          mt-4
+          text-gray-300
+          ">
+            解锁更多模型、更高额度、更快生成
+          </p>
+
+
+          <button className="
+          mt-8
+          px-10
+          py-4
+          bg-white
+          text-black
+          rounded-full
+          font-bold
+          ">
+            开通会员
+          </button>
+
+
+        </div>
+
+
+      </section>
+
+
+
+
+
+      {/* 底部 */}
+
+      <footer className="
+      px-6
+      pb-10
+      text-center
+      text-gray-500
+      ">
+
+        © 2026 PromptX Studio
+
+      </footer>
+
+
+
+    </main>
+
+  )
 
 }

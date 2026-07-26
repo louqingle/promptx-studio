@@ -119,3 +119,31 @@ text-lg
 
 )
 }
+const [prompt,setPrompt]=useState("");
+const [result,setResult]=useState("");
+
+async function generate(){
+
+const res = await fetch("/api/generate",{
+method:"POST",
+headers:{
+"Content-Type":"application/json"
+},
+body:JSON.stringify({
+prompt
+})
+});
+
+const data=await res.json();
+
+setResult(data.result);
+
+}
+<button
+onClick={generate}
+>
+开始创作
+</button>
+<div className="mt-10 whitespace-pre-line">
+{result}
+</div>

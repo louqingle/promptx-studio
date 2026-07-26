@@ -2,16 +2,18 @@
 
 import { useState } from "react";
 
-export default function CreatePage() {
 
-const [prompt,setPrompt] = useState("");
-const [result,setResult] = useState("");
-const [loading,setLoading] = useState(false);
+export default function CreatePage(){
+
+const [prompt,setPrompt]=useState("");
+const [result,setResult]=useState("");
+const [loading,setLoading]=useState(false);
 
 
 async function generate(){
 
 setLoading(true);
+
 
 setTimeout(()=>{
 
@@ -20,19 +22,26 @@ setResult(
 
 ${prompt}
 
+
 cinematic lighting,
 8K,
 IMAX quality,
 ultra realistic,
 professional camera,
-movie scene`
+movie scene,
+high detail,
+HDR`
 );
+
 
 setLoading(false);
 
+
 },1000);
 
+
 }
+
 
 
 return (
@@ -87,8 +96,7 @@ border-white/20
 px-5
 py-2
 rounded-full
-"
->
+">
 
 首页
 
@@ -134,6 +142,7 @@ AI 创作工作台
 </h2>
 
 
+
 <p className="
 text-gray-400
 mt-5
@@ -154,7 +163,7 @@ onChange={(e)=>setPrompt(e.target.value)}
 
 placeholder="
 描述你的想法，例如：
-一个宇航员站在火星看日落，电影级摄影
+一个宇航员在火星看日落，电影级摄影
 "
 
 className="
@@ -169,7 +178,6 @@ p-6
 text-white
 outline-none
 "
-
 
 />
 
@@ -193,11 +201,15 @@ font-bold
 >
 
 {
-loading
-?
+
+loading?
+
 "AI生成中..."
+
 :
+
 "开始创作"
+
 }
 
 
@@ -205,16 +217,18 @@ loading
 
 
 
+
 {
+
 result &&
 
 <div className="
 mt-10
+p-6
+rounded-3xl
 bg-white/10
 border
 border-white/20
-rounded-3xl
-p-6
 text-left
 whitespace-pre-wrap
 ">
@@ -223,8 +237,8 @@ whitespace-pre-wrap
 
 </div>
 
-}
 
+}
 
 
 </section>

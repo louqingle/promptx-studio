@@ -23,11 +23,16 @@ return (
 
 {/* 背景 */}
 
-<div className="
+<div
+className="
 absolute inset-0
-bg-[radial-gradient(circle_at_top,#312e81,transparent_40%)]
-opacity-60
-"/>
+bg-gradient-to-b
+from-purple-900/40
+via-black
+to-black
+opacity-70
+"
+/>
 
 
 <div className="relative z-10">

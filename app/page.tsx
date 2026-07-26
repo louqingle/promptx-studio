@@ -237,7 +237,6 @@ AI导演模式
 
 
 </section>
-      </section>
 
 
     </div>

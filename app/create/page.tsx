@@ -2,265 +2,240 @@
 
 import { useState } from "react";
 
-
 export default function CreatePage() {
 
-  const [prompt, setPrompt] = useState("");
-  const [result, setResult] = useState("");
-  const [loading, setLoading] = useState(false);
+const [prompt,setPrompt] = useState("");
+const [result,setResult] = useState("");
+const [loading,setLoading] = useState(false);
 
 
-  async function generate() {
+async function generate(){
 
-    if (!prompt) return;
+setLoading(true);
 
+setTimeout(()=>{
 
-    setLoading(true);
+setResult(
+`电影级AI提示词：
 
+${prompt}
 
-    try {
+cinematic lighting,
+8K,
+IMAX quality,
+ultra realistic,
+professional camera,
+movie scene`
+);
 
-      const res = await fetch("/api/generate", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json"
-        },
-        body: JSON.stringify({
-          prompt
-        })
-      });
+setLoading(false);
 
+},1000);
 
-      const data = await res.json();
+}
 
 
-      setResult(data.result || "生成失败");
+return (
 
+<main className="
+min-h-screen
+bg-black
+text-white
+">
 
-    } catch (error) {
 
-      setResult("请求失败，请检查 API");
+<div className="
+min-h-screen
+bg-gradient-to-b
+from-purple-900/30
+via-black
+to-black
+px-6
+py-10
+">
 
-    }
 
+<header className="
+max-w-5xl
+mx-auto
+flex
+justify-between
+items-center
+">
 
-    setLoading(false);
 
-  }
+<h1 className="
+text-3xl
+font-black
+bg-gradient-to-r
+from-cyan-400
+to-purple-500
+bg-clip-text
+text-transparent
+">
 
+🚀 PromptX Studio
 
+</h1>
 
-  return (
 
-    <main className="
-    min-h-screen
-    bg-black
-    text-white
-    ">
+<a
+href="/"
+className="
+border
+border-white/20
+px-5
+py-2
+rounded-full
+"
+>
 
+首页
 
-      <div className="
-      min-h-screen
-      bg-gradient-to-b
-      from-purple-900/30
-      via-black
-      to-black
-      px-6
-      py-10
-      ">
+</a>
 
 
+</header>
 
-        <header className="
-        max-w-5xl
-        mx-auto
-        flex
-        justify-between
-        items-center
-        ">
 
 
-          <h1 className="
-          text-3xl
-          font-black
-          bg-gradient-to-r
-          from-cyan-400
-          to-purple-500
-          bg-clip-text
-          text-transparent
-          ">
+<section className="
+max-w-5xl
+mx-auto
+text-center
+mt-20
+">
 
-            🚀 PromptX Studio
 
-          </h1>
+<div className="
+inline-block
+px-6
+py-3
+rounded-full
+border
+border-white/20
+bg-white/5
+">
 
+✨ AI Creation Workspace
 
-          <a
-          href="/"
-          className="
-          border
-          border-white/20
-          px-5
-          py-2
-          rounded-full
-          "
-          >
+</div>
 
-            首页
 
-          </a>
 
+<h2 className="
+text-5xl
+font-black
+mt-10
+">
 
-        </header>
+AI 创作工作台
 
+</h2>
 
 
+<p className="
+text-gray-400
+mt-5
+text-lg
+">
 
+输入一个想法，生成电影级内容
 
-        <section className="
-        max-w-5xl
-        mx-auto
-        text-center
-        mt-20
-        ">
+</p>
 
 
-          <div className="
-          inline-block
-          px-6
-          py-3
-          rounded-full
-          border
-          border-white/20
-          bg-white/5
-          ">
 
-            ✨ AI Creation Workspace
+<textarea
 
-          </div>
+value={prompt}
 
+onChange={(e)=>setPrompt(e.target.value)}
 
+placeholder="
+描述你的想法，例如：
+一个宇航员站在火星看日落，电影级摄影
+"
 
-          <h2 className="
-          text-5xl
-          font-black
-          mt-10
-          ">
+className="
+mt-10
+w-full
+h-40
+rounded-3xl
+bg-white/10
+border
+border-white/20
+p-6
+text-white
+outline-none
+"
 
-            AI 创作工作台
 
-          </h2>
+/>
 
 
 
-          <p className="
-          text-gray-400
-          mt-5
-          text-lg
-          ">
+<button
 
-            输入一个想法，生成电影级内容
+onClick={generate}
 
-          </p>
+className="
+mt-8
+px-10
+py-5
+rounded-full
+bg-white
+text-black
+text-xl
+font-bold
+"
 
+>
 
+{
+loading
+?
+"AI生成中..."
+:
+"开始创作"
+}
 
-          <textarea
 
-          value={prompt}
+</button>
 
-          onChange={(e)=>setPrompt(e.target.value)}
 
-          placeholder="
-          例如：
-          一个宇航员站在火星看日落，
-          电影级摄影，IMAX画质
-          "
 
-          className="
-          mt-12
-          w-full
-          h-48
-          rounded-3xl
-          bg-white/10
-          border
-          border-white/20
-          p-6
-          text-white
-          text-lg
-          outline-none
-          "
+{
+result &&
 
-          />
+<div className="
+mt-10
+bg-white/10
+border
+border-white/20
+rounded-3xl
+p-6
+text-left
+whitespace-pre-wrap
+">
 
+{result}
 
+</div>
 
+}
 
 
-          <button
 
-          onClick={generate}
+</section>
 
-          className="
-          mt-8
-          px-10
-          py-5
-          rounded-full
-          bg-white
-          text-black
-          text-xl
-          font-bold
-          "
 
-          >
+</div>
 
-          {
-            loading
-            ?
-            "AI生成中..."
-            :
-            "开始创作"
-          }
 
+</main>
 
-          </button>
 
-
-
-
-
-          {
-          result &&
-
-          <div className="
-          mt-10
-          text-left
-          whitespace-pre-line
-          rounded-3xl
-          border
-          border-white/20
-          bg-white/5
-          p-8
-          ">
-
-
-            {result}
-
-
-          </div>
-
-          }
-
-
-
-        </section>
-
-
-      </div>
-
-
-    </main>
-
-  );
+)
 
 }

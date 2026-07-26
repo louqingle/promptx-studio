@@ -1,352 +1,177 @@
 export default function Home() {
+  const models = [
+    "OpenAI Sora",
+    "Runway Gen-4",
+    "可灵AI",
+    "即梦AI",
+    "Midjourney",
+    "Flux",
+  ];
 
-const models = [
-"OpenAI Sora",
-"Runway Gen-4",
-"可灵AI",
-"即梦AI",
-"Midjourney",
-"Flux"
-]
+  const features = [
+    ["🎬", "电影级视频", "一句话生成完整AI影片"],
+    ["🤖", "AI导演模式", "自动分镜、运镜、剧情"],
+    ["🎙️", "智能配音", "多语言真实声音"],
+    ["✨", "4K高清输出", "专业影视级画质"],
+  ];
 
-const features = [
-["🎬","AI电影生成","一句话生成完整电影分镜"],
-["🤖","AI导演","自动运镜、剧情、脚本"],
-["🎙️","智能配音","多语言真实声音"],
-["✨","8K输出","电影级视觉效果"]
-]
+  return (
+    <main className="min-h-screen bg-black text-white overflow-hidden">
 
+      {/* 背景光效 */}
+      <div className="fixed inset-0 bg-[radial-gradient(circle_at_top,#1e40af33,transparent_40%)]" />
 
-return (
+      <div className="relative z-10 max-w-6xl mx-auto px-6 py-10">
 
-<main className="min-h-screen bg-black text-white overflow-hidden">
+        {/* 顶部 */}
+        <nav className="flex justify-between items-center">
+          <h1 className="text-3xl font-bold">
+            🚀 PromptX Studio
+          </h1>
 
-{/* 背景 */}
+          <button className="px-5 py-2 rounded-full bg-white text-black">
+            登录
+          </button>
+        </nav>
 
-<div
-className="
-absolute inset-0
-bg-gradient-to-b
-from-purple-900/40
-via-black
-to-black
-opacity-70
-"
-/>
 
+        {/* Hero */}
+        <section className="text-center mt-24">
 
-<div className="relative z-10">
+          <div className="inline-block px-5 py-2 rounded-full border border-white/20 bg-white/5">
+            AI Creative Studio
+          </div>
 
 
-{/* 导航 */}
+          <h2 className="text-6xl font-black mt-8 leading-tight">
+            让 AI 帮你创造
+            <br />
+            <span className="bg-gradient-to-r from-cyan-400 to-purple-500 bg-clip-text text-transparent">
+              电影级内容
+            </span>
+          </h2>
 
-<header className="
-flex justify-between
-items-center
-px-8 py-6
-">
 
-<h1 className="
-text-3xl font-bold
-bg-gradient-to-r
-from-cyan-400
-to-purple-500
-bg-clip-text
-text-transparent
-">
-🚀 PromptX Studio
-</h1>
+          <p className="text-xl text-gray-400 mt-8">
+            一句话生成 AI 视频、图片、脚本、分镜和专业 Prompt
+          </p>
 
 
-<nav className="
-hidden md:flex gap-8 text-gray-300
-">
+          <div className="flex justify-center gap-5 mt-10">
 
-<span>AI视频</span>
-<span>AI图片</span>
-<span>Prompt市场</span>
-<span>会员</span>
+            <button className="px-8 py-4 rounded-full bg-white text-black text-lg font-bold">
+              开始创作
+            </button>
 
-</nav>
+            <button className="px-8 py-4 rounded-full border border-white/30">
+              AI 导演模式
+            </button>
 
+          </div>
 
-<button className="
-px-5 py-2
-rounded-full
-bg-white
-text-black
-font-bold
-">
-开始创作
-</button>
+        </section>
 
-</header>
 
 
+        {/* 数据 */}
+        <section className="grid grid-cols-3 gap-6 mt-32">
 
+          <div className="p-8 rounded-3xl bg-white/5 border border-white/10">
+            <h3 className="text-4xl font-bold">100+</h3>
+            <p className="text-gray-400 mt-3">
+              电影模板
+            </p>
+          </div>
 
-{/* Hero */}
 
-<section className="
-text-center
-pt-24
-px-6
-">
+          <div className="p-8 rounded-3xl bg-white/5 border border-white/10">
+            <h3 className="text-4xl font-bold">10+</h3>
+            <p className="text-gray-400 mt-3">
+              AI模型
+            </p>
+          </div>
 
 
-<h2 className="
-text-6xl
-font-black
-leading-tight
-">
+          <div className="p-8 rounded-3xl bg-white/5 border border-white/10">
+            <h3 className="text-4xl font-bold">4K</h3>
+            <p className="text-gray-400 mt-3">
+              高清输出
+            </p>
+          </div>
 
-让 AI 帮你创造
+        </section>
 
-<br/>
 
-<span className="
-bg-gradient-to-r
-from-cyan-400
-via-blue-500
-to-purple-600
-bg-clip-text
-text-transparent
-">
-电影级内容
-</span>
 
+        {/* 功能 */}
+        <section className="mt-32">
 
-</h2>
+          <h2 className="text-4xl font-bold">
+            核心能力
+          </h2>
 
 
+          <div className="grid md:grid-cols-2 gap-6 mt-10">
 
-<p className="
-mt-8
-text-xl
-text-gray-400
-">
+            {features.map((item,index)=>(
+              <div
+              key={index}
+              className="p-8 rounded-3xl bg-white/5 border border-white/10 hover:bg-white/10 transition"
+              >
 
-一句话生成
-AI视频、
-图片、
-脚本、
-分镜和专业Prompt
+                <div className="text-4xl">
+                  {item[0]}
+                </div>
 
-</p>
+                <h3 className="text-2xl font-bold mt-5">
+                  {item[1]}
+                </h3>
 
+                <p className="text-gray-400 mt-3">
+                  {item[2]}
+                </p>
 
+              </div>
+            ))}
 
-<div className="
-mt-10
-flex justify-center
-gap-5
-">
+          </div>
 
-<button className="
-px-10 py-4
-rounded-xl
-bg-gradient-to-r
-from-cyan-500
-to-purple-600
-font-bold
-text-lg
-">
+        </section>
 
-🎬 AI导演模式
 
-</button>
 
+        {/* 模型 */}
+        <section className="mt-32">
 
-<button className="
-px-10 py-4
-rounded-xl
-border border-gray-700
-">
+          <h2 className="text-4xl font-bold">
+            支持模型
+          </h2>
 
-创建Prompt
+          <div className="flex flex-wrap gap-4 mt-8">
 
-</button>
+          {models.map((m)=>(
+            <div
+            key={m}
+            className="px-6 py-3 rounded-full bg-white/10 border border-white/20"
+            >
+              {m}
+            </div>
+          ))}
 
+          </div>
 
-</div>
+        </section>
 
 
-</section>
 
+        {/* Footer */}
+        <footer className="mt-40 text-center text-gray-500">
+          © 2026 PromptX Studio
+        </footer>
 
 
+      </div>
 
-
-{/* 数据 */}
-
-<section className="
-grid
-grid-cols-3
-gap-5
-max-w-4xl
-mx-auto
-mt-24
-px-6
-">
-
-
-<div className="bg-white/5 p-6 rounded-2xl">
-<h3 className="text-3xl font-bold">
-100+
-</h3>
-<p className="text-gray-400">
-电影模板
-</p>
-</div>
-
-
-<div className="bg-white/5 p-6 rounded-2xl">
-<h3 className="text-3xl font-bold">
-10+
-</h3>
-<p className="text-gray-400">
-AI模型
-</p>
-</div>
-
-
-<div className="bg-white/5 p-6 rounded-2xl">
-<h3 className="text-3xl font-bold">
-4K
-</h3>
-<p className="text-gray-400">
-高清输出
-</p>
-</div>
-
-
-</section>
-
-
-
-
-
-{/* 功能 */}
-
-<section className="
-max-w-6xl
-mx-auto
-mt-24
-px-6
-">
-
-
-<h2 className="
-text-4xl
-font-bold
-text-center
-">
-核心能力
-</h2>
-
-
-
-<div className="
-grid md:grid-cols-4
-gap-6
-mt-10
-">
-
-
-{features.map((f,i)=>(
-
-<div
-key={i}
-className="
-bg-white/5
-border
-border-white/10
-rounded-3xl
-p-6
-hover:bg-white/10
-transition
-">
-
-<div className="text-4xl">
-{f[0]}
-</div>
-
-<h3 className="text-xl font-bold mt-4">
-{f[1]}
-</h3>
-
-<p className="text-gray-400 mt-3">
-{f[2]}
-</p>
-
-</div>
-
-))}
-
-
-</div>
-
-</section>
-
-
-
-
-
-{/* 模型 */}
-
-<section className="
-mt-24
-text-center
-pb-20
-">
-
-
-<h2 className="
-text-3xl font-bold
-">
-支持全球AI模型
-</h2>
-
-
-<div className="
-flex flex-wrap
-justify-center
-gap-4
-mt-8
-">
-
-
-{
-models.map((m)=>(
-
-<div
-key={m}
-className="
-px-6 py-3
-rounded-full
-bg-white/10
-border border-white/10
-">
-
-{m}
-
-</div>
-
-))
-}
-
-
-</div>
-
-
-</section>
-
-
-
-</div>
-
-</main>
-
-)
-
+    </main>
+  );
 }

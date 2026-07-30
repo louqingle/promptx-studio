@@ -11,54 +11,32 @@ const [loading,setLoading] = useState(false)
 
 
 
-function generatePrompt(){
+async function generatePrompt(){
 
-if(!idea.trim()){
+if(!idea){
 alert("请输入你的创意")
 return
 }
 
-
 setLoading(true)
 
+const res = await fetch("/api/generate",{
+method:"POST",
+headers:{
+"Content-Type":"application/json"
+},
+body:JSON.stringify({
+idea
+})
+})
 
-setTimeout(()=>{
+const data = await res.json()
 
-
-setResult(
-`🎬 电影级 AI 提示词
-
-${idea}
-
-
-视觉风格：
-Cinematic movie scene,
-IMAX quality,
-8K ultra realistic,
-Hollywood film style,
-professional camera,
-dramatic lighting,
-high detail,
-masterpiece
-
-
-镜头：
-cinematic composition,
-depth of field,
-volumetric light,
-realistic materials`
-
-)
-
+setResult(data.result)
 
 setLoading(false)
 
-
-},1000)
-
-
 }
-
 
 
 

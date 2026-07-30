@@ -1,44 +1,28 @@
-import { NextResponse } from "next/server";
+import { NextResponse } from "next/server"
 
-export async function POST(req: Request) {
+export async function POST(req:Request){
 
-  const { prompt } = await req.json();
+const {idea}=await req.json()
 
+const prompt=`
+你是一名专业AI电影导演。
 
-  const result = `
-🎬 视频 Prompt：
+根据用户创意生成专业AI视频提示词。
 
-${prompt}
+用户创意：
+${idea}
 
-电影级画面，真实摄影，
-IMAX镜头语言，8K HDR，
-专业电影灯光。
+输出：
 
+1. 场景描述
+2. 摄影语言
+3. 镜头运动
+4. 光影效果
+5. 8K电影参数
+`
 
-🖼 图片 Prompt：
-
-${prompt},
-ultra realistic,
-cinematic lighting,
-8K,
-high detail.
-
-
-📝 剧本：
-
-镜头一：
-建立场景，展示环境。
-
-镜头二：
-人物进入画面。
-
-镜头三：
-高潮镜头，电影级运镜。
-`;
-
-
-  return NextResponse.json({
-    result
-  });
+return NextResponse.json({
+result:prompt
+})
 
 }

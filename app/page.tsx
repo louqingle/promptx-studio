@@ -234,11 +234,6 @@ text-gray-400
 AI视频 · AI图片 · 剧本 · 分镜 · 配音
 
 </p>
-
-
-
-
-
 {/* 输入框 */}
 
 <div className="
@@ -253,16 +248,17 @@ p-5
 backdrop-blur-xl
 ">
 
-
 <textarea
+
 value={idea}
+
 onChange={(e)=>setIdea(e.target.value)}
+
 placeholder="
 描述你的想法...
 
 例如：
-一个宇航员在火星看日落，
-电影级摄影，IMAX画质
+一个宇航员在火星看日落
 "
 
 className="
@@ -300,7 +296,8 @@ text-lg
 </button>
 
 
-{result && (
+{
+result && (
 
 <div
 className="
@@ -310,7 +307,6 @@ rounded-3xl
 bg-black/40
 border
 border-white/10
-text-gray-200
 whitespace-pre-line
 "
 >
@@ -319,10 +315,11 @@ whitespace-pre-line
 
 </div>
 
-)}
+)
+}
 
 
-</section>
+</div>
       {/* AI工作流 */}
 
       <section className="

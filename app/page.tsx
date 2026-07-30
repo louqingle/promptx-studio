@@ -279,11 +279,31 @@ p-4
 />
 
 
-</button>      
-{
-result && (
+<button
 
-<div className="
+onClick={generatePrompt}
+
+className="
+w-full
+mt-4
+py-4
+rounded-2xl
+bg-gradient-to-r
+from-cyan-400
+to-purple-600
+font-bold
+text-lg
+">
+
+{loading ? "生成中..." : "✨ 开始生成"}
+
+</button>
+
+
+{result && (
+
+<div
+className="
 mt-8
 p-6
 rounded-3xl
@@ -292,16 +312,14 @@ border
 border-white/10
 text-gray-200
 whitespace-pre-line
-">
+"
+>
 
 {result}
 
 </div>
 
-)
-}
-
-</div>
+)}
 
 
 </section>

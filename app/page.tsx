@@ -1,4 +1,44 @@
+"use client"
+
+import { useState } from "react"
+
 export default function Home() {
+
+const [idea,setIdea] = useState("")
+const [result,setResult] = useState("")
+const [loading,setLoading] = useState(false)
+
+
+async function generatePrompt(){
+
+if(!idea){
+alert("请输入你的创意")
+return
+}
+
+setLoading(true)
+
+setTimeout(()=>{
+
+setResult(
+`电影级AI提示词：
+
+${idea}
+
+Cinematic lighting,
+IMAX movie quality,
+8K ultra realistic,
+professional camera,
+Hollywood film style,
+dramatic atmosphere,
+high detail`
+)
+
+setLoading(false)
+
+},1000)
+
+}
 
 const models = [
 "Sora",
@@ -215,7 +255,8 @@ backdrop-blur-xl
 
 
 <textarea
-
+value={idea}
+onChange={(e)=>setIdea(e.target.value)}
 placeholder="
 描述你的想法...
 
@@ -238,22 +279,27 @@ p-4
 />
 
 
-<button className="
-w-full
-mt-4
-py-4
-rounded-2xl
-bg-gradient-to-r
-from-cyan-400
-to-purple-600
-font-bold
-text-lg
+</button>      
+{
+result && (
+
+<div className="
+mt-8
+p-6
+rounded-3xl
+bg-black/40
+border
+border-white/10
+text-gray-200
+whitespace-pre-line
 ">
 
-✨ 开始生成
+{result}
 
-</button>
+</div>
 
+)
+}
 
 </div>
 

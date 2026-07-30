@@ -2,6 +2,7 @@
 
 import { useState } from "react"
 
+
 export default function Home(){
 
 const [idea,setIdea] = useState("")
@@ -9,72 +10,96 @@ const [result,setResult] = useState("")
 const [loading,setLoading] = useState(false)
 
 
+
 function generatePrompt(){
 
-if(!idea){
+if(!idea.trim()){
 alert("请输入你的创意")
 return
 }
 
+
 setLoading(true)
+
 
 setTimeout(()=>{
 
+
 setResult(
-`电影级 AI 提示词：
+`🎬 电影级 AI 提示词
 
 ${idea}
 
-Cinematic lighting,
-IMAX movie quality,
+
+视觉风格：
+Cinematic movie scene,
+IMAX quality,
 8K ultra realistic,
 Hollywood film style,
 professional camera,
-dramatic atmosphere,
+dramatic lighting,
 high detail,
 masterpiece
-`
+
+
+镜头：
+cinematic composition,
+depth of field,
+volumetric light,
+realistic materials`
+
 )
+
 
 setLoading(false)
 
+
 },1000)
+
 
 }
 
 
 
+
+const tools=[
+
+{
+icon:"🎬",
+title:"AI视频导演",
+desc:"自动生成电影分镜和视频方案"
+},
+
+{
+icon:"🎨",
+title:"AI图片创作",
+desc:"生成角色、场景、商业视觉"
+},
+
+{
+icon:"📝",
+title:"AI剧本助手",
+desc:"创造人物、剧情和对白"
+},
+
+{
+icon:"🎙️",
+title:"AI声音工作室",
+desc:"智能配音和声音设计"
+}
+
+]
+
+
 const models=[
+
 "Sora",
 "Runway",
 "可灵AI",
 "即梦AI",
 "Midjourney",
 "Flux"
-]
 
-
-const tools=[
-{
-icon:"🎬",
-title:"AI视频导演",
-desc:"输入故事，自动生成电影分镜和视频方案"
-},
-{
-icon:"🎨",
-title:"AI视觉设计",
-desc:"生成海报、角色、场景和商业图片"
-},
-{
-icon:"📝",
-title:"AI剧本助手",
-desc:"自动创造人物、剧情和对白"
-},
-{
-icon:"🎙️",
-title:"AI声音工作室",
-desc:"多语言智能配音"
-}
 ]
 
 
@@ -99,13 +124,15 @@ to-black
 "/>
 
 
+
 <div className="
 relative
 z-10
-max-w-7xl
+max-w-6xl
 mx-auto
 px-6
 ">
+
 
 
 <nav className="
@@ -131,8 +158,7 @@ text-transparent
 </h1>
 
 
-<button
-className="
+<button className="
 px-6
 py-3
 rounded-full
@@ -147,6 +173,8 @@ font-bold
 
 
 </nav>
+
+
 
 
 
@@ -172,15 +200,18 @@ bg-white/5
 
 
 
+
 <h2 className="
-mt-12
+mt-10
 text-6xl
 font-black
+leading-tight
 ">
 
 一句话
 
 <br/>
+
 
 <span className="
 bg-gradient-to-r
@@ -195,7 +226,9 @@ text-transparent
 
 </span>
 
+
 </h2>
+
 
 
 
@@ -208,6 +241,9 @@ text-gray-400
 AI视频 · AI图片 · 剧本 · 分镜 · 配音
 
 </p>
+
+
+
 
 
 <div className="
@@ -229,9 +265,10 @@ value={idea}
 onChange={(e)=>setIdea(e.target.value)}
 
 placeholder="
-描述你的想法...
-例如：
-一个宇航员在火星看日落
+输入你的创意，例如：
+
+一只猫咪在月球散步
+
 "
 
 className="
@@ -241,9 +278,11 @@ bg-transparent
 outline-none
 resize-none
 p-4
+text-white
 "
 
 />
+
 
 
 <button
@@ -272,16 +311,18 @@ loading?
 </button>
 
 
+
+
 {
 result &&
 
 <div className="
-mt-8
-p-6
-rounded-3xl
+mt-6
+rounded-2xl
 bg-black/40
 border
 border-white/10
+p-6
 text-left
 whitespace-pre-line
 ">
@@ -293,15 +334,20 @@ whitespace-pre-line
 }
 
 
+
 </div>
 
 
 </section>
+
+
+
+
+
 {/* AI工作流 */}
 
 <section className="
 mt-32
-px-2
 ">
 
 
@@ -326,7 +372,9 @@ mt-12
 
 
 {
+
 tools.map((tool)=>(
+
 
 <div
 
@@ -338,8 +386,6 @@ border
 border-white/10
 bg-white/5
 p-8
-hover:bg-white/10
-transition
 "
 
 >
@@ -354,11 +400,10 @@ text-5xl
 </div>
 
 
-
 <h3 className="
 text-xl
 font-bold
-mt-6
+mt-5
 ">
 
 {tool.title}
@@ -366,10 +411,9 @@ mt-6
 </h3>
 
 
-
 <p className="
 text-gray-400
-mt-4
+mt-3
 ">
 
 {tool.desc}
@@ -377,18 +421,21 @@ mt-4
 </p>
 
 
-
 </div>
 
-))
-}
 
+))
+
+
+}
 
 
 </div>
 
 
 </section>
+
+
 
 
 
@@ -431,8 +478,8 @@ models.map((model)=>(
 key={model}
 
 className="
-px-8
-py-4
+px-6
+py-3
 rounded-full
 border
 border-white/20
@@ -445,6 +492,7 @@ bg-white/5
 
 </div>
 
+
 ))
 
 }
@@ -453,113 +501,16 @@ bg-white/5
 </div>
 
 
-   </section>
-
-
-
-
-
-
-
-{/* 案例展示 */}
-
-<section className="
-mt-32
-">
-
-
-<h2 className="
-text-4xl
-font-black
-text-center
-">
-
-热门 AI 作品
-
-</h2>
-
-
-
-
-<div className="
-grid
-md:grid-cols-3
-gap-6
-mt-12
-">
-
-
-<div className="
-h-56
-rounded-3xl
-bg-gradient-to-br
-from-blue-500/30
-to-purple-600/30
-border
-border-white/10
-flex
-items-center
-justify-center
-text-xl
-font-bold
-">
-
-🌌 星际电影
-
-</div>
-
-
-
-
-<div className="
-h-56
-rounded-3xl
-bg-gradient-to-br
-from-purple-500/30
-to-pink-600/30
-border
-border-white/10
-flex
-items-center
-justify-center
-text-xl
-font-bold
-">
-
-🌆 未来城市
-
-</div>
-
-
-
-
-
-<div className="
-h-56
-rounded-3xl
-bg-gradient-to-br
-from-cyan-500/30
-to-blue-600/30
-border
-border-white/10
-flex
-items-center
-justify-center
-text-xl
-font-bold
-">
-
-🚗 商业广告
-
-</div>
-
-
-
-</div>
-
-
 </section>
-      {/* 会员价格 */}
+
+
+
+
+
+
+
+
+{/* 会员 */}
 
 <section className="
 mt-32
@@ -623,12 +574,13 @@ text-gray-400
 mt-5
 ">
 
-基础AI创作体验
+基础AI体验
 
 </p>
 
 
 </div>
+
 
 
 
@@ -669,16 +621,15 @@ text-gray-400
 mt-5
 ">
 
-适合短视频创作者
+短视频创作者
 
 </p>
 
 
-
 <button className="
-mt-8
+mt-6
 w-full
-py-4
+py-3
 rounded-full
 bg-white
 text-black
@@ -691,6 +642,7 @@ font-bold
 
 
 </div>
+
 
 
 
@@ -731,7 +683,7 @@ text-gray-400
 mt-5
 ">
 
-专业AI工作流
+专业工作流
 
 </p>
 
@@ -748,71 +700,6 @@ mt-5
 
 
 
-
-
-{/* CTA */}
-
-<section className="
-mb-20
-rounded-3xl
-border
-border-white/20
-bg-gradient-to-r
-from-cyan-500/20
-via-purple-500/20
-to-pink-500/20
-p-10
-text-center
-">
-
-
-<h2 className="
-text-4xl
-font-black
-">
-
-开始创造你的第一个 AI 作品
-
-</h2>
-
-
-
-<p className="
-text-gray-300
-mt-5
-">
-
-从想法到作品，只需要一句话
-
-</p>
-
-
-
-<button className="
-mt-8
-px-10
-py-4
-rounded-full
-bg-white
-text-black
-font-bold
-">
-
-立即体验
-
-</button>
-
-
-</section>
-
-
-
-
-
-
-
-
-{/* Footer */}
 
 <footer className="
 text-center
@@ -826,7 +713,6 @@ pb-10
 
 
 
-
 </div>
 
 
@@ -836,3 +722,4 @@ pb-10
 )
 
 }
+   

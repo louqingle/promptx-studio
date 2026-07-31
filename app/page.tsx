@@ -305,7 +305,28 @@ text-left
 whitespace-pre-line
 ">
 
-{result}
+<div>
+<p>{result}</p>
+
+<button
+onClick={()=>{
+navigator.clipboard.writeText(result)
+alert("复制成功")
+}}
+className="
+mt-6
+px-6
+py-3
+rounded-full
+bg-white
+text-black
+font-bold
+"
+>
+📋 复制 Prompt
+</button>
+
+</div>
 
 </div>
 

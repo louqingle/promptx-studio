@@ -4,82 +4,164 @@ export async function POST(req: Request){
 
 const {idea}=await req.json()
 
+let scene = ""
+let camera = ""
+let light = ""
+let style = ""
 
-let style="电影级视觉"
 
-if(
-idea.includes("猫") ||
-idea.includes("狗") ||
-idea.includes("动物")
-){
-style="温暖治愈的动物电影"
+if(idea.includes("猫") || idea.includes("狗") || idea.includes("动物")){
+
+scene = `
+一只可爱的动物作为主角，
+在特殊环境中探索世界，
+表现真实细腻的毛发，
+丰富的情绪表情，
+电影级故事感。
+`
+
+camera = `
+微距电影摄影，
+低角度跟拍，
+慢动作镜头，
+特写动物眼神。
+`
+
+light = `
+柔和自然光，
+电影暖色调，
+梦幻氛围。
+`
+
+style="治愈系动物电影"
+
 }
 
-if(
+
+else if(
 idea.includes("未来") ||
 idea.includes("机器人") ||
 idea.includes("科技")
 ){
-style="赛博朋克未来科幻电影"
+
+scene=`
+未来世界城市，
+高科技建筑，
+智能机器人穿梭其中，
+无人驾驶车辆，
+巨大的未来都市空间。
+`
+
+camera=`
+IMAX电影摄影，
+无人机航拍，
+环绕镜头，
+电影级运镜。
+`
+
+light=`
+蓝紫色霓虹灯光，
+雨夜反射，
+赛博朋克视觉效果。
+`
+
+style="未来科幻大片"
+
 }
 
-if(
+
+else if(
 idea.includes("宇航员") ||
-idea.includes("太空") ||
 idea.includes("月球") ||
-idea.includes("火星")
+idea.includes("火星") ||
+idea.includes("太空")
 ){
-style="NASA太空史诗电影"
+
+scene=`
+浩瀚宇宙背景，
+宇航员探索未知星球，
+巨大行星和星云出现，
+史诗级空间场景。
+`
+
+camera=`
+NASA纪录片摄影，
+慢推进镜头，
+广角电影镜头。
+`
+
+light=`
+宇宙冷色光，
+真实星球光影，
+震撼视觉效果。
+`
+
+style="太空史诗电影"
+
+}
+
+
+else{
+
+scene=`
+根据用户创意创造一个真实电影场景，
+加入人物、环境、故事细节。
+`
+
+camera=`
+专业电影摄影机，
+电影镜头语言，
+动态运镜。
+`
+
+light=`
+真实光影，
+电影调色，
+高级视觉效果。
+`
+
+style="好莱坞电影风格"
+
 }
 
 
 const prompt=`
 
-🎬 AI电影提示词生成
+🎬 AI电影提示词
 
 主题：
 ${idea}
 
 
-电影风格：
+电影类型：
 ${style}
 
 
-【场景】
-根据主题创造真实电影场景，
-包含环境、时间、天气、空间细节。
+【场景设计】
+${scene}
 
 
-【摄影】
-专业电影摄影机，
-ARRI Alexa 35，
-电影级镜头语言。
+【摄影语言】
+${camera}
 
 
-【镜头运动】
-使用：
-慢推进镜头，
-环绕镜头，
-低角度拍摄，
-电影运镜。
+【光影效果】
+${light}
 
 
-【光影】
-真实光影，
-体积光，
-电影色彩，
-高级调色。
+【生成参数】
+
+8K Ultra Realistic
+IMAX Quality
+Cinematic Lighting
+Hollywood Movie Style
+Professional Camera
+High Detail
+16:9
 
 
-【AI参数】
-
-8K Ultra Realistic,
-IMAX quality,
-Cinematic lighting,
-Hollywood movie style,
-16:9,
-high detail
-
+适用于：
+Sora / Runway / 可灵AI / Midjourney
 
 `
 

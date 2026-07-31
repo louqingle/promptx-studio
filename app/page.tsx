@@ -181,15 +181,15 @@ bg-white/5
 
 <h2 className="
 mt-10
-text-6xl
+text-5xl
+md:text-8xl
 font-black
 leading-tight
 ">
 
-一句话
+你的想法
 
 <br/>
-
 
 <span className="
 bg-gradient-to-r
@@ -200,12 +200,24 @@ bg-clip-text
 text-transparent
 ">
 
-创造你的AI电影
+一键变成AI作品
 
 </span>
 
-
 </h2>
+
+
+<p className="
+mt-8
+text-xl
+text-gray-400
+">
+
+AI视频 · AI图片 · 剧本 · 分镜 · 配音  
+<br/>
+从一句话到电影级作品
+
+</p>
 
 
 

@@ -296,13 +296,16 @@ from-cyan-400
 to-purple-600
 font-bold
 text-lg
+shadow-lg
+hover:scale-105
+transition
 ">
 
 {
 loading?
 "生成中..."
 :
-"✨ 开始生成"
+🎬 生成电影级 Prompt
 }
 
 </button>

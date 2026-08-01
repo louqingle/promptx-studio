@@ -300,19 +300,15 @@ shadow-lg
 hover:scale-105
 transition
 ">
-
-{
-loading?
-"生成中..."
-
-🎬 生成电影级 Prompt
+   
+{loading ? "生成中..." : "🎬 生成电影级 Prompt"}
 
 </button>
 
 
 
 
-{
+
 result &&
 
 <div className="

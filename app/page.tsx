@@ -304,9 +304,8 @@ transition
 {
 loading?
 "生成中..."
-:
+
 🎬 生成电影级 Prompt
-}
 
 </button>
 

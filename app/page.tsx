@@ -255,24 +255,31 @@ value={idea}
 onChange={(e)=>setIdea(e.target.value)}
 
 placeholder="
-输入你的创意，例如：
+描述你的创意...
 
-一只猫咪在月球散步
-
+例如：
+一个外卖员凌晨三点骑车穿越未来城市，
+电影级摄影，IMAX画质
 "
 
 className="
 w-full
-h-36
-bg-transparent
+h-44
+bg-black/30
+rounded-2xl
 outline-none
 resize-none
-p-4
 text-white
+text-lg
+placeholder-gray-500
+p-6
+border
+border-white/10
+focus:border-purple-500
+transition
 "
 
 />
-
 
 
 <button

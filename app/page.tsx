@@ -310,17 +310,18 @@ transition
 
 
 {result && (
-  <div className="
-  mt-6
-  rounded-2xl
-  bg-black/40
-  border
-  border-white/10
-  p-6
-  text-left
-  whitespace-pre-line
-  ">
-
+  <div
+    className="
+      mt-6
+      rounded-2xl
+      bg-black/40
+      border
+      border-white/10
+      p-6
+      text-left
+      whitespace-pre-line
+    "
+  >
     <div>
       <p>{result}</p>
 
@@ -330,20 +331,18 @@ transition
           alert("复制成功")
         }}
         className="
-        mt-6
-        px-6
-        py-3
-        rounded-full
-        bg-white
-        text-black
-        font-bold
+          mt-6
+          px-6
+          py-3
+          rounded-full
+          bg-white
+          text-black
+          font-bold
         "
       >
         📋 复制 Prompt
       </button>
-
     </div>
-
   </div>
 )}
 

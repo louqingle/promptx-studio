@@ -1,5 +1,5 @@
 import { NextResponse } from "next/server"
-
+import { createClient } from "@supabase/supabase-js"
 type PromptType = "image" | "video"
 type Language = "zh" | "en"
 
@@ -13,7 +13,7 @@ type EnhanceType =
 export async function POST(req: Request) {
   try {
     const body = await req.json()
-
+    const userId = body?.userId
     const idea = body?.idea
 
     const type: PromptType =
@@ -332,13 +332,29 @@ ${idea.trim()}
         }
       )
     }
+if (userId) {
+  const supabase = createClient(
+    process.env.NEXT_PUBLIC_SUPABASE_URL!,
+    process.env.SUPABASE_SERVICE_ROLE_KEY!
+  )
 
-    return NextResponse.json({
-      result,
-      type,
-      language,
-      enhance,
+  await supabase
+    .from("prompt_history")
+    .insert({
+      user_id: userId,
+      input_text: idea,
+      result_text: result,
     })
+}
+
+
+return NextResponse.json({
+  result,
+  type,
+  language,
+  enhance,
+})
+    
   } catch (error) {
     console.error(
       "PromptX Generate Error:",

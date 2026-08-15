@@ -1477,24 +1477,32 @@ className="rounded-full bg-white px-5 py-2.5 font-bold text-black"
     </main>
   )
 }
+{showAuth && (
+  <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/70">
+    <div className="w-full max-w-md rounded-3xl bg-[#111] p-6">
 
-  return (
-    <>
-      你原来的页面内容
+      <button
+        onClick={() => setShowAuth(false)}
+        className="mb-4 text-xl"
+      >
+        ×
+      </button>
 
+      <Auth />
 
-      {showAuth && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/70">
+    </div>
+  </div>
+)}
+return (
+  <>
+    你的原页面内容
 
-          <div className="w-full max-w-md rounded-3xl bg-[#111] p-6">
+    {showAuth && (
+      <div>
+        <Auth />
+      </div>
+    )}
 
-            <Auth />
-
-          </div>
-
-        </div>
-      )}
-
-    </>
-  )
+  </>
+)
 }

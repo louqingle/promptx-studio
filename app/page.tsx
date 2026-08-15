@@ -103,7 +103,6 @@ const templates = [
 export default function Home() {
 const [showAuth, setShowAuth] = useState(false)  
 const [user,setUser] = useState<any>(null)
-const [showAuth,setShowAuth] = useState(false)
 
 useEffect(()=>{
 

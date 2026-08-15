@@ -1,5 +1,7 @@
 "use client"
-
+import Auth from "@/components/Auth"
+import { supabase } from "@/lib/supabase"
+import { useEffect } from "react"
 import { useEffect, useState } from "react"
 
 type PromptType = "image" | "video"
@@ -100,6 +102,17 @@ const templates = [
 ]
 
 export default function Home() {
+  const [user,setUser] = useState<any>(null)
+const [showAuth,setShowAuth] = useState(false)
+
+useEffect(()=>{
+
+  supabase.auth.getUser()
+  .then(({data})=>{
+    setUser(data.user)
+  })
+
+},[])
   const [idea, setIdea] = useState("")
   const [result, setResult] = useState("")
   const [loading, setLoading] = useState(false)
@@ -542,9 +555,22 @@ export default function Home() {
               </span>
             </button>
 
-            <button className="rounded-full bg-white px-5 py-2.5 font-bold text-black transition hover:bg-gray-200">
-              登录
-            </button>
+           {user ? (
+
+<div className="text-sm">
+  👤 {user.email}
+</div>
+
+) : (
+
+<button
+onClick={()=>setShowAuth(true)}
+className="rounded-full bg-white px-5 py-2.5 font-bold text-black"
+>
+登录
+</button>
+
+)}
 
           </div>
 
@@ -1450,3 +1476,23 @@ export default function Home() {
     </main>
   )
 }
+{showAuth && (
+
+<div className="fixed inset-0 z-50 flex items-center justify-center bg-black/70">
+
+<div className="w-full max-w-md rounded-3xl bg-[#111] p-6">
+
+<button
+onClick={()=>setShowAuth(false)}
+className="float-right text-xl"
+>
+×
+</button>
+
+<Auth/>
+
+</div>
+
+</div>
+
+)}

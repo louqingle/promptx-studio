@@ -104,7 +104,10 @@ export default function Home() {
 
 const [showAuth, setShowAuth] = useState(false)  
 const [user,setUser] = useState<any>(null)
-
+const logout = async () => {
+  await supabase.auth.signOut()
+  setUser(null)
+}
 const [prompt, setPrompt] = useState("")
 useEffect(()=>{
 

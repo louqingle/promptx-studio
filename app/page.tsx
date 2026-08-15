@@ -1493,16 +1493,3 @@ className="rounded-full bg-white px-5 py-2.5 font-bold text-black"
     </div>
   </div>
 )}
-return (
-  <>
-    你的原页面内容
-
-    {showAuth && (
-      <div>
-        <Auth />
-      </div>
-    )}
-
-  </>
-)
-}

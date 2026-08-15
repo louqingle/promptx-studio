@@ -1473,9 +1473,8 @@ className="rounded-full bg-white px-5 py-2.5 font-bold text-black"
         </div>
 
       )}
-    {showAuth && (
+        {showAuth && (
       <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/70">
-
         <div className="w-full max-w-md rounded-3xl bg-[#111] p-6">
 
           <button
@@ -1488,12 +1487,10 @@ className="rounded-full bg-white px-5 py-2.5 font-bold text-black"
           <Auth />
 
         </div>
-
       </div>
     )}
 
     </main>
-  </>
+
   )
-}
-   
+}   

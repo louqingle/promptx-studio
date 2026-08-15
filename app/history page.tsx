@@ -127,6 +127,17 @@ export default function HistoryPage() {
                 <p className="whitespace-pre-wrap text-gray-200">
                   {item.result_text}
                 </p>
+                <button
+  onClick={() => {
+    navigator.clipboard.writeText(
+      item.result_text
+    )
+    alert("Prompt 已复制")
+  }}
+  className="mt-4 rounded-xl bg-white px-4 py-2 text-black"
+>
+  复制 Prompt
+</button>
 
 
               </div>

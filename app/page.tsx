@@ -1,5 +1,5 @@
 "use client"
-import Auth from "@/components/Auth"
+import Auth from "../components/Auth"
 import { supabase } from "../lib/supabase"
 import{ useEffect, useState } from "react"
 

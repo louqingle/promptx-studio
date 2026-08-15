@@ -1473,23 +1473,27 @@ className="rounded-full bg-white px-5 py-2.5 font-bold text-black"
         </div>
 
       )}
+    {showAuth && (
+      <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/70">
+
+        <div className="w-full max-w-md rounded-3xl bg-[#111] p-6">
+
+          <button
+            onClick={() => setShowAuth(false)}
+            className="mb-4 text-xl text-white"
+          >
+            ×
+          </button>
+
+          <Auth />
+
+        </div>
+
+      </div>
+    )}
 
     </main>
+  </>
   )
 }
-{showAuth && (
-  <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/70">
-    <div className="w-full max-w-md rounded-3xl bg-[#111] p-6">
-
-      <button
-        onClick={() => setShowAuth(false)}
-        className="mb-4 text-xl"
-      >
-        ×
-      </button>
-
-      <Auth />
-
-    </div>
-  </div>
-)}
+   

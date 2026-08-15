@@ -1477,7 +1477,7 @@ className="rounded-full bg-white px-5 py-2.5 font-bold text-black"
     </main>
   )
 }
-{showAuth && (
+
   return (
     <>
       你原来的页面内容

@@ -1,8 +1,7 @@
 "use client"
 import Auth from "@/components/Auth"
-import { supabase } from "@/lib/supabase"
-import { useEffect } from "react"
-import { useEffect, useState } from "react"
+import { supabase } from "../lib/supabase"
+import{ useEffect, useState } from "react"
 
 type PromptType = "image" | "video"
 type Language = "zh" | "en"

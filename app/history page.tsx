@@ -6,7 +6,35 @@ export default function HistoryPage() {
 
   const [history, setHistory] = useState<any[]>([])
   const [loading, setLoading] = useState(true)
+  const toggleFavorite = async (
+  id:string,
+  favorite:boolean
+) => {
 
+  const { error } = await supabase
+    .from("prompt_history")
+    .update({
+      favorite: !favorite
+    })
+    .eq("id", id)
+
+
+  if(!error){
+
+    setHistory(prev =>
+      prev.map(item =>
+        item.id === id
+        ? {
+            ...item,
+            favorite: !favorite
+          }
+        : item
+      )
+    )
+
+  }
+
+} 
 
   useEffect(() => {
 
@@ -127,6 +155,19 @@ export default function HistoryPage() {
                 <p className="whitespace-pre-wrap text-gray-200">
                   {item.result_text}
                 </p>
+                <button
+  onClick={() =>
+    toggleFavorite(
+      item.id,
+      item.favorite
+    )
+  }
+  className="mt-4 rounded-xl bg-white/10 px-4 py-2"
+>
+  {item.favorite
+    ? "⭐ 已收藏"
+    : "☆ 收藏"}
+</button>
                 <button
   onClick={() => {
     navigator.clipboard.writeText(

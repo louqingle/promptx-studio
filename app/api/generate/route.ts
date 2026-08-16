@@ -1,5 +1,6 @@
 import { NextResponse } from "next/server"
 import { createClient } from "@supabase/supabase-js"
+
 type PromptType = "image" | "video"
 type Language = "zh" | "en"
 
@@ -17,31 +18,24 @@ export async function POST(req: Request) {
     const idea = body?.idea
 
     const type: PromptType =
-      body?.type === "video"
-        ? "video"
-        : "image"
+      body?.type === "video" ? "video" : "image"
 
     const language: Language =
-      body?.language === "en"
-        ? "en"
-        : "zh"
+      body?.language === "en" ? "en" : "zh"
 
-    const enhance: EnhanceType =
-      [
-        "optimize",
-        "realistic",
-        "cinematic",
-        "commercial",
-        "character",
-      ].includes(body?.enhance)
-        ? body.enhance
-        : "optimize"
+    const enhance: EnhanceType = [
+      "optimize",
+      "realistic",
+      "cinematic",
+      "commercial",
+      "character",
+    ].includes(body?.enhance)
+      ? body.enhance
+      : "optimize"
 
-    if (
-      !idea ||
-      typeof idea !== "string" ||
-      !idea.trim()
-    ) {
+    const cameraMove = body?.cameraMove || ""
+
+    if (!idea || typeof idea !== "string" || !idea.trim()) {
       return NextResponse.json(
         {
           error:
@@ -53,33 +47,19 @@ export async function POST(req: Request) {
       )
     }
 
-    const apiKey =
-      process.env.DEEPSEEK_API_KEY
+    const apiKey = process.env.DEEPSEEK_API_KEY
 
     if (!apiKey) {
       return NextResponse.json(
-        {
-          error:
-            "服务器尚未配置 DEEPSEEK_API_KEY",
-        },
+        { error: "服务器尚未配置 DEEPSEEK_API_KEY" },
         { status: 500 }
       )
     }
 
-    const outputLanguage =
-      language === "zh"
-        ? "简体中文"
-        : "English"
+    const outputLanguage = language === "zh" ? "简体中文" : "English"
+    const promptType = type === "video" ? "AI Video Prompt" : "AI Image Prompt"
 
-    const promptType =
-      type === "video"
-        ? "AI Video Prompt"
-        : "AI Image Prompt"
-
-    const enhancementInstructions: Record<
-      EnhanceType,
-      string
-    > = {
+    const enhancementInstructions: Record<EnhanceType, string> = {
       optimize: `
 全面优化 Prompt。
 
@@ -171,66 +151,59 @@ export async function POST(req: Request) {
 
 你的任务是把用户输入的创意，转换成专业的 ${promptType}。
 
-输出语言：
-${outputLanguage}
+输出语言：${outputLanguage}
 
 严格规则：
-
 1. 用户选择中文时，最终结果必须使用简体中文。
 2. 用户选择 English 时，最终结果必须使用英文。
-3. 不要因为平台名称是英文而自动切换语言。
-4. 不要解释思考过程。
-5. 不要告诉用户你做了什么。
-6. 直接输出最终 Prompt。
-7. 不要输出无关废话。
-8. 不要擅自改变用户核心创意。
-9. Prompt 必须具体、可执行、有视觉信息。
-10. 避免大量空洞形容词。
+3. 不要解释思考过程。
+4. 不要告诉用户你做了什么。
+5. 直接输出最终结果，使用以下严格格式：
+
+PROMPT:
+（这里写完整的专业 Prompt）
+
+NEGATIVE:
+（这里写负面提示词，用逗号分隔）
+
+PARAMS:
+（这里写推荐参数，例如 --ar 16:9 --stylize 250 --v 6 或 镜头参数）
+
+6. 不要输出其他多余内容。
+7. 不要擅自改变用户核心创意。
+8. Prompt 必须具体、可执行、有视觉信息。
+9. 避免大量空洞形容词。
 
 当前增强模式：
-
 ${enhancementInstructions[enhance]}
 `
 
     let userPrompt = ""
 
     if (type === "video") {
+      const cameraInstruction = cameraMove
+        ? `\n【镜头运动】用户指定了镜头运动：${cameraMove}。请优先使用这个镜头运动。`
+        : ""
+
       userPrompt = `
 请把下面内容制作成专业的 AI 视频 Prompt。
 
 重点考虑：
 
-【主体】
-人物、动物、物体的外观。
-
-【环境】
-地点、天气、时间、背景。
-
-【动作】
-主体正在做什么，以及动作如何变化。
-
-【镜头】
-景别、焦段、机位、构图、镜头运动。
-
-【环境运动】
-雨、烟雾、车辆、人群、树叶、灯光等动态。
-
-【灯光】
-主光、环境光、轮廓光、色温。
-
-【色彩】
-整体色彩和视觉风格。
-
-【氛围】
-情绪、故事感、空间感。
-
-【视频质感】
-真实摄影机、景深、运动模糊、胶片颗粒等。
+【主体】人物、动物、物体的外观。
+【环境】地点、天气、时间、背景。
+【动作】主体正在做什么，以及动作如何变化。
+【镜头】景别、焦段、机位、构图、镜头运动。
+【环境运动】雨、烟雾、车辆、人群、树叶、灯光等动态。
+【灯光】主光、环境光、轮廓光、色温。
+【色彩】整体色彩和视觉风格。
+【氛围】情绪、故事感、空间感。
+【视频质感】真实摄影机、景深、运动模糊、胶片颗粒等。
 
 如果适合，请设计清晰的开始、中间和结束。
+${cameraInstruction}
 
 用户创意：
-
 ${idea.trim()}
 `
     } else {
@@ -239,35 +212,17 @@ ${idea.trim()}
 
 重点考虑：
 
-【主体】
-人物、动物、产品或物体。
-
-【环境】
-地点、时间、天气、背景。
-
-【构图】
-主体位置、前景、中景、背景。
-
-【摄影】
-摄影机、镜头焦段、视角、景深。
-
-【灯光】
-光源方向、光质、色温、明暗关系。
-
-【色彩】
-主色调、辅助色、色彩关系。
-
-【材质】
-皮肤、衣物、建筑、金属、玻璃等。
-
-【氛围】
-情绪和视觉叙事。
-
-【画质】
-真实摄影质感、细节、景深、胶片颗粒。
+【主体】人物、动物、产品或物体。
+【环境】地点、时间、天气、背景。
+【构图】主体位置、前景、中景、背景。
+【摄影】摄影机、镜头焦段、视角、景深。
+【灯光】光源方向、光质、色温、明暗关系。
+【色彩】主色调、辅助色、色彩关系。
+【材质】皮肤、衣物、建筑、金属、玻璃等。
+【氛围】情绪和视觉叙事。
+【画质】真实摄影质感、细节、景深、胶片颗粒。
 
 用户创意：
-
 ${idea.trim()}
 `
     }
@@ -276,29 +231,18 @@ ${idea.trim()}
       "https://api.deepseek.com/chat/completions",
       {
         method: "POST",
-
         headers: {
           "Content-Type": "application/json",
           Authorization: `Bearer ${apiKey}`,
         },
-
         body: JSON.stringify({
           model: "deepseek-chat",
-
           messages: [
-            {
-              role: "system",
-              content: systemPrompt,
-            },
-            {
-              role: "user",
-              content: userPrompt,
-            },
+            { role: "system", content: systemPrompt },
+            { role: "user", content: userPrompt },
           ],
-
-          temperature: 0.8,
-
-          max_tokens: 3000,
+          temperature: 0.75,
+          max_tokens: 3500,
         }),
       }
     )
@@ -307,68 +251,94 @@ ${idea.trim()}
 
     if (!response.ok) {
       return NextResponse.json(
-        {
-          error:
-            data?.error?.message ||
-            "AI API 请求失败",
-        },
-        {
-          status: response.status,
-        }
+        { error: data?.error?.message || "AI API 请求失败" },
+        { status: response.status }
       )
     }
 
-    const result =
-      data?.choices?.[0]?.message?.content
+    const rawResult = data?.choices?.[0]?.message?.content || ""
 
-    if (!result) {
+    if (!rawResult) {
       return NextResponse.json(
-        {
-          error:
-            "AI 没有返回有效结果",
-        },
-        {
-          status: 502,
-        }
+        { error: "AI 没有返回有效结果" },
+        { status: 502 }
       )
     }
-if (userId) {
-  const supabase = createClient(
-    process.env.NEXT_PUBLIC_SUPABASE_URL!,
-    process.env.SUPABASE_SERVICE_ROLE_KEY!
-  )
 
-  await supabase
-    .from("prompt_history")
-    .insert({
-      user_id: userId,
-      input_text: idea,
-      result_text: result,
+    // 解析结构化输出
+    let promptText = rawResult
+    let negativeText = ""
+    let paramsText = ""
+
+    const promptMatch = rawResult.match(/PROMPT:\s*([\s\S]*?)(?=NEGATIVE:|$)/i)
+    const negativeMatch = rawResult.match(/NEGATIVE:\s*([\s\S]*?)(?=PARAMS:|$)/i)
+    const paramsMatch = rawResult.match(/PARAMS:\s*([\s\S]*?)$/i)
+
+    if (promptMatch) {
+      promptText = promptMatch[1].trim()
+    }
+    if (negativeMatch) {
+      negativeText = negativeMatch[1].trim()
+    }
+    if (paramsMatch) {
+      paramsText = paramsMatch[1].trim()
+    }
+
+    // 如果解析失败，就用原始结果
+    if (!promptText) {
+      promptText = rawResult
+    }
+
+    // 默认负面提示词（如果AI没给）
+    if (!negativeText) {
+      negativeText =
+        language === "zh"
+          ? "低质量, 模糊, 变形, 多余的手指, 文字, 水印, 过度曝光, 塑料皮肤, 畸形"
+          : "low quality, blurry, deformed, extra fingers, text, watermark, overexposed, plastic skin, mutated"
+    }
+
+    if (!paramsText) {
+      paramsText =
+        type === "video"
+          ? language === "zh"
+            ? "推荐：16:9，电影感，自然运动模糊"
+            : "Recommended: 16:9, cinematic, natural motion blur"
+          : language === "zh"
+            ? "--ar 16:9 --stylize 250 --v 6"
+            : "--ar 16:9 --stylize 250 --v 6"
+    }
+
+    if (userId) {
+      try {
+        const supabase = createClient(
+          process.env.NEXT_PUBLIC_SUPABASE_URL!,
+          process.env.SUPABASE_SERVICE_ROLE_KEY!
+        )
+
+        await supabase.from("prompt_history").insert({
+          user_id: userId,
+          input_text: idea,
+          result_text: promptText,
+        })
+      } catch (e) {
+        console.error("Supabase history error:", e)
+      }
+    }
+
+    return NextResponse.json({
+      result: promptText,
+      negative: negativeText,
+      params: paramsText,
+      type,
+      language,
+      enhance,
     })
-}
-
-
-return NextResponse.json({
-  result,
-  type,
-  language,
-  enhance,
-})
-    
   } catch (error) {
-    console.error(
-      "PromptX Generate Error:",
-      error
-    )
+    console.error("PromptX Generate Error:", error)
 
     return NextResponse.json(
-      {
-        error:
-          "服务器处理请求失败，请稍后重试",
-      },
-      {
-        status: 500,
-      }
+      { error: "服务器处理请求失败，请稍后重试" },
+      { status: 500 }
     )
   }
 }
